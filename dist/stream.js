@@ -74,6 +74,10 @@
 
 }(this));
 
+// Design based on
+// http://dvcs.w3.org/hg/html-media/raw-file/tip/media-source/media-source.html
+//
+/*global MediaSource: false, document: false, URL: false, Blob: false, Uint8Array: false, EventEmitter: false, XMLHttpRequest: false, FileReader: false */
 (function( exports ) {
 
   var Abstract;
