@@ -27,16 +27,16 @@
     }
   };
 
-  function Media( setup ) {
+  function Stream( setup ) {
     // Batch [[Put]] constructor properties
     Abstract.put.call( this, setup );
 
     // Create a new MediaSource
     //    Will be used as a pointer for creating
-    //    an incoming media source media via object URL
+    //    an incoming media source stream via object URL
     this.source = new MediaSource();
 
-    // If no video property was passed to the Media
+    // If no video property was passed to the Stream
     // constructor, we naively create and append
     // directly to the document.body.
     // TODO: Allow this to have a target or take
@@ -55,21 +55,21 @@
       this.media = document.querySelector( setup.media );
     }
 
-    // Default to Media.CHUNKS if no "chunks" was provided
+    // Default to Stream.CHUNKS if no "chunks" was provided
     if ( this.chunks === undefined ) {
-      this.chunks = Media.CHUNKS;
+      this.chunks = Stream.CHUNKS;
     }
 
     // Create a temporary object URL and assign it
     // to the video.src prop--this will feed the media
-    // media into HTMLVideoElement displayed in the browser
+    // stream into HTMLVideoElement displayed in the browser
     this.media.src = URL.createObjectURL( this.source );
 
     // Initialize an empty buffer. This will be assigned
     // later when the source is opened
     this.buffer = null;
 
-    // Read media blob created after successful file request
+    // Read stream blob created after successful file request
     this.blob = null;
 
     // When the source is open...
@@ -115,17 +115,17 @@
     }.bind(this), false);
   }
 
-  // Augment the media API with EventEmitter API
-  Media.prototype = Object.create( EventEmitter.prototype );
+  // Augment the stream API with EventEmitter API
+  Stream.prototype = Object.create( EventEmitter.prototype );
 
 
   // Class-side "static" data properties
   //
   // Set CHUNKS to use when no "chunks" count is defined
-  Media.CHUNKS = 5;
+  Stream.CHUNKS = 5;
 
 
-  Media.prototype.request = function( continuation ) {
+  Stream.prototype.request = function( continuation ) {
     var xhr = new XMLHttpRequest();
 
     xhr.onload = function( event ) {
@@ -140,7 +140,7 @@
   };
 
 
-  Media.prototype.read = function( slice ) {
+  Stream.prototype.read = function( slice ) {
     var read, start;
 
     slice = slice === undefined ? -1 : slice;
@@ -148,7 +148,7 @@
     // Once we've reached the max slices, kill it.
     if ( ++slice === this.chunks ) {
 
-      this.source.endOfMedia();
+      this.source.endOfStream();
     } else {
 
       // Initialize a file reader to load in the blob
@@ -190,6 +190,6 @@
     }
   };
 
-  exports.Media = Media;
+  exports.Stream = Stream;
 
 }( this ));
