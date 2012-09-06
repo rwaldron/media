@@ -1,23 +1,23 @@
 {
-  "name": "stream",
-  "description": "Simplified media streaming with MediaSource (Chrome Canary only)",
+  "name": "media",
+  "description": "Simplified media mediaing with MediaSource (Chrome Canary only)",
   "version": "0.1.0",
-  "homepage": "https://github.com/rwldrn/stream",
+  "homepage": "https://github.com/rwldrn/media",
   "author": {
     "name": "Rick Waldron",
     "email": "waldron.rick@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/rwldrn/stream.git"
+    "url": "git://github.com/rwldrn/media.git"
   },
   "bugs": {
-    "url": "https://github.com/rwldrn/stream/issues"
+    "url": "https://github.com/rwldrn/media/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/rwldrn/stream/blob/master/LICENSE-MIT"
+      "url": "https://github.com/rwldrn/media/blob/master/LICENSE-MIT"
     }
   ],
   "scripts": {

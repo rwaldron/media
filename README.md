@@ -1,22 +1,22 @@
-# stream
+# media
 
-Simplified media streaming with MediaSource (Chrome Canary only)
+Simplified media mediaing with MediaSource (Chrome Canary only)
 
 ## Getting Started
 ### In the browser
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/rick/stream/master/dist/stream.min.js
-[max]: https://raw.github.com/rick/stream/master/dist/stream.js
+[min]: https://raw.github.com/rick/media/master/dist/media.min.js
+[max]: https://raw.github.com/rick/media/master/dist/media.js
 
 In your web page:
 
 ```html
-<script src="dist/stream.min.js"></script>
+<script src="dist/media.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
-  var stream = new Stream({
+  var media = new Media({
     media: "#container",
     file: "test.webm"
     // Optionally...
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Events
   [ "sourceopen", "response", "progress", "data" ].forEach(function( type ) {
-    stream.on( type, function( data ) {
+    media.on( type, function( data ) {
       console.log( type + ": ", data );
     });
   });

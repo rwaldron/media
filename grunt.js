@@ -46,7 +46,7 @@ module.exports = function(grunt) {
       globals: {
         exports: true,
         module: false,
-        Stream: true,
+        Media: true,
         console: true
       }
     },

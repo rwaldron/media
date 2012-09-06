@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  var stream = new Stream({
+  var media = new Media({
     media: "#container",
     file: "test.webm"
     // Optionally...
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Events
   [ "sourceopen", "response", "progress", "data" ].forEach(function( type ) {
-    stream.on( type, function( data ) {
+    media.on( type, function( data ) {
       console.log( type + ": ", data );
     });
   });
