@@ -31,22 +31,22 @@
     // Batch [[Put]] constructor properties
     Abstract.put.call( this, setup );
 
-    // Create a new MediaSource
+    // Create a new MediaSource, or use explicitly provided MediaSource
     //    Will be used as a pointer for creating
     //    an incoming media source media via object URL
-    this.source = new MediaSource();
+    this.source = this.source || new MediaSource();
 
     // If no video property was passed to the Media
     // constructor, we naively create and append
     // directly to the document.body.
     // TODO: Allow this to have a target or take
     //        parameterized config properties
-    if ( this.media === undefined ) {
-      // create the video and inject into the dom
-      document.body.appendChild(
-        this.media = document.createElement("video")
-      );
-    }
+    // if ( this.media === undefined ) {
+    //   // create the media and inject into the dom
+    //   document.body.appendChild(
+    //     this.media = document.createElement("video")
+    //   );
+    // }
 
     // Support valid selectors to identify media containers
     // This allows users to pass a "selector" string OR
@@ -73,12 +73,14 @@
     this.blob = null;
 
     // When the source is open...
+    // TODO: remove "webkit" prefix.
     this.source.addEventListener("webkitsourceopen", function( event ) {
-      this.emit( "sourceopen",  { target: this, data: event });
+      this.emit("sourceopen",  { target: this, data: event });
 
       // 1. Assign a source buffer to this
       this.buffer = this.source.addSourceBuffer(
         // Note: Codec strings expect double quotes on the inside??
+        // TODO: Allow codec string to explicitly provided
         'video/webm; codecs="vorbis,vp8"'
       );
 
@@ -98,6 +100,7 @@
         // Initialize a new Blob; blob
         this.blob = new Blob(
           [ new Uint8Array(response) ],
+          // TODO: Allow blob mimetype string to explicitly provided
           { type: "video/webm" }
         );
 
@@ -106,7 +109,7 @@
         this.blob.chunkSize = Math.ceil( this.blob.size / this.chunks );
 
         // Emit a blobcreate event, pass the blob and |this| target
-        this.emit( "blobcreate", { target: this, data: this.blob });
+        // this.emit( "blobcreate", { target: this, data: this.blob });
 
         // begin blob read loop at slice zero
         this.read();
